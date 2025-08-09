@@ -351,3 +351,14 @@ a:hover {
 /* Accessibility: make titles keyboard-focusable */
 .exp-title { outline: none; }
 .exp-title:focus { box-shadow: 0 0 0 3px rgba(0,122,255,0.12); border-radius: 6px; }
+.exp-content {
+  transition: max-height 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.8s ease;
+  max-height: 40px;
+  opacity: 0.9;
+}
+
+.expanded .exp-content {
+  max-height: 1000px;
+  opacity: 1;
+}
