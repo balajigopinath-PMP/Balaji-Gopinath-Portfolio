@@ -1,0 +1,137 @@
+body {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  color: #1d1d1f;
+}
+
+section {
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  margin: 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.intro {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.btn-download {
+  background: #007aff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-download:hover {
+  opacity: 0.9;
+}
+
+.video-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.video-button img {
+  width: 240px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.video-button span {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #007aff;
+  font-weight: 500;
+}
+
+.cert-badges img {
+  height: 80px;
+  margin: 10px;
+}
+
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-grid span {
+  background: #f0f0f2;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-grid span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Experience Bullets */
+.exp-list {
+  list-style: none;
+  padding: 0;
+}
+
+.exp-list li {
+  padding: 12px 0;
+  border-bottom: 0.5px solid #e0e0e0;
+  position: relative;
+  cursor: pointer;
+}
+
+.exp-list li::after {
+  content: '›';
+  position: absolute;
+  right: 0;
+  top: 12px;
+  font-size: 18px;
+  color: #007aff;
+  transition: transform 0.3s ease;
+}
+
+.exp-list li.expanded::after {
+  transform: rotate(90deg);
+}
+
+.exp-list li span {
+  display: block;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #555;
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
