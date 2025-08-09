@@ -68,3 +68,52 @@ const fadeObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 fadeElements.forEach(el => fadeObserver.observe(el));
+document.addEventListener("DOMContentLoaded", () => {
+  const expItems = document.querySelectorAll(".exp-list li");
+  const video = document.getElementById("introVideo");
+  const unmuteBtn = document.getElementById("unmuteBtn");
+
+  expItems.forEach(item => {
+    let expanded = false;
+    item.addEventListener("click", () => {
+      if (!expanded) {
+        item.innerHTML = `<strong>${item.textContent}</strong>: ${item.dataset.full}`;
+        expanded = true;
+      } else {
+        item.innerHTML = `<strong>${item.textContent.split(":")[0]}</strong>`;
+        expanded = false;
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !expanded) {
+          item.innerHTML = `<strong>${item.textContent}</strong>: ${item.dataset.full}`;
+          expanded = true;
+        } else if (!entry.isIntersecting && expanded) {
+          item.innerHTML = `<strong>${item.textContent.split(":")[0]}</strong>`;
+          expanded = false;
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(item);
+  });
+
+  let videoVisible = true;
+  const videoObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!videoVisible) {
+          video.src = video.src;
+          videoVisible = true;
+          setTimeout(() => unmuteBtn.classList.add("visible"), 2500);
+        }
+      } else {
+        videoVisible = false;
+      }
+    });
+  }, { threshold: 0.5 });
+
+  videoObserver.observe(video);
+});
