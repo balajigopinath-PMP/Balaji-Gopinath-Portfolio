@@ -1,65 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Balaji Gopinath | Apple-Style Portfolio</title>
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balaji Gopinath | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Intro Section -->
+  <section class="intro fade-up">
+    <h1>Balaji Gopinath</h1>
+    <p>Program & Strategy | PMP®, CSM®</p>
+    <div class="video-container">
+      <img id="videoPlaceholder" src="40113996-1B29-47F3-A7ED-760F569E4675.jpeg" alt="Video Intro" />
+      <iframe id="introVideo" src="https://www.youtube.com/embed/0WkZfPto9aI?autoplay=1&mute=1&controls=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen"></iframe>
+      <button id="unmuteBtn" class="unmute-btn">🔊 Tap to Unmute</button>
+    </div>
+    <a href="Balaji_Gopinath_PMP_CSM.pdf" download class="btn-download">⬇ Download Resume</a>
+  </section>
 
-<header class="intro-section">
-  <h1>Balaji Gopinath</h1>
-  <p>Program & Strategy | PMP®, CSM®</p>
-  <div class="video-container glass">
-    <video id="introVideo" muted autoplay playsinline>
-      <source src="your-video.mp4" type="video/mp4" />
-    </video>
-    <button id="unmuteBtn" class="glass hidden">🔊 Tap to Unmute</button>
-  </div>
-  <a href="resume.pdf" class="download-btn glass" download>⬇️ Download Resume</a>
-</header>
+  <!-- About -->
+  <section class="card fade-up glass">
+    <h2>About Me</h2>
+    <p>PMP® & CSM®-certified program analyst with 7+ years in operational excellence, governance, and intelligent workflow automation at Verizon and Amazon.</p>
+  </section>
 
-<section class="glass-section">
-  <h2 class="sticky-header">Experience</h2>
-  <div class="experience">
-    <h3>Verizon</h3>
-    <ul>
-      <li><strong>Program Automation & Reporting</strong>: Automated operational reports and RFP workflows, reducing turnaround times by 30%...</li>
-      <li><strong>Governance Implementation</strong>: Implemented QA governance frameworks...</li>
-      <!-- Repeat for all Verizon points -->
+  <!-- Experience -->
+  <section class="card fade-up glass">
+    <h2>Experience</h2>
+    <h3>Verizon – Program & Project Management Analyst</h3>
+    <ul class="exp-list">
+      <li data-full="Automated operational reports and RFP workflows, reducing turnaround times by 30% and improving leadership decision-making with real-time reporting."><strong>Program Automation & Reporting</strong></li>
+      <li data-full="Implemented QA governance frameworks for pricing and approvals, reducing rework and audit exceptions across the RFP lifecycle."><strong>Governance Implementation</strong></li>
+      <li data-full="Built interactive Power BI dashboards to track revenue trends, product performance, and risk metrics—enhancing executive visibility and proactive issue detection."><strong>Business Intelligence</strong></li>
+      <li data-full="Conducted RCA for deal delays; embedded insights into workflow redesign and sprint plans to eliminate root inefficiencies."><strong>Root Cause Analysis</strong></li>
+      <li data-full="Applied Lean Six Sigma and Agile methodologies to increase program delivery speed, operational maturity, and stakeholder alignment."><strong>Process Methodology</strong></li>
+      <li data-full="Trained cross-functional teams on BI tools, process documentation, and self-service reporting, improving adoption and consistency."><strong>Training & Enablement</strong></li>
+      <li data-full="Partnered with GTM stakeholders (Sales Ops, Finance, Compliance) to align project goals and improve operational rhythm."><strong>Stakeholder Alignment</strong></li>
     </ul>
+
     <h3>Amazon</h3>
-    <ul>
-      <li><strong>Continuous Improvement</strong>: Deployed DMAIC and PDCA frameworks...</li>
-      <li><strong>Performance Reporting</strong>: Developed KPI frameworks...</li>
-      <!-- Repeat for all Amazon points -->
+    <h4>Program Specialist</h4>
+    <ul class="exp-list">
+      <li data-full="Deployed DMAIC and PDCA frameworks, improving team productivity by 18% and project efficiency by 25%."><strong>Continuous Improvement</strong></li>
+      <li data-full="Developed KPI frameworks and integrated metrics into BI dashboards for weekly/monthly leadership reviews (WBR/MBR)."><strong>Performance Reporting</strong></li>
+      <li data-full="Conducted training on blueprinting, business continuity planning (BCP), FMEA, and change management tools."><strong>Training & Change Management</strong></li>
+      <li data-full="Standardized documentation and risk protocols, reinforcing governance practices and improving safety compliance by 15%."><strong>Governance & Compliance</strong></li>
     </ul>
-  </div>
-</section>
 
-<section class="glass-section">
-  <h2 class="sticky-header">Skills</h2>
-  <div class="skills-grid">
-    <span class="tag">Lean Six Sigma</span>
-    <span class="tag">Agile</span>
-    <span class="tag">Power BI</span>
-    <!-- Add all skills -->
-  </div>
-</section>
+    <h4>Retail Operations Associate</h4>
+    <ul class="exp-list">
+      <li data-full="Conducted competitive pricing analysis and automated audit workflows, increasing compliance by 18% across product lines."><strong>Pricing & Compliance</strong></li>
+      <li data-full="Collaborated with global teams to refine processes and ensure SOP standardization."><strong>Process Standardization</strong></li>
+    </ul>
+  </section>
 
-<section class="glass-section">
-  <h2 class="sticky-header">Certifications</h2>
-  <a href="pmp-badge-link" class="cert-badge glass">PMP®</a>
-  <a href="csm-badge-link" class="cert-badge glass">CSM®</a>
-</section>
+  <!-- Skills -->
+  <section class="card fade-up glass">
+    <h2>Skills & Tools</h2>
+    <div class="tag-grid">
+      <span>Agile & Scrum</span>
+      <span>Lean Six Sigma</span>
+      <span>Power BI</span>
+      <span>Slack Workflow Builder</span>
+      <span>Jira</span>
+      <span>Google Workspace</span>
+      <span>Data Analysis</span>
+      <span>Change Management</span>
+      <span>Process Automation</span>
+    </div>
+  </section>
 
-<section class="glass-section">
-  <h2 class="sticky-header">Contact</h2>
-  <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-  <p>LinkedIn: <a href="https://linkedin.com/in/your-linkedin">linkedin.com/in/your-linkedin</a></p>
-</section>
+  <!-- Certifications -->
+  <section class="card fade-up glass">
+    <h2>Certifications</h2>
+    <div class="cert-badges">
+      <a href="https://bcert.me/ssrybtlnp" target="_blank">
+        <img src="badge-CSM.png" alt="CSM Badge">
+      </a>
+      <a href="badge-PMP.jpeg" target="_blank">
+        <img src="badge-PMP.jpeg" alt="PMP Badge">
+      </a>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- Contact -->
+  <section class="card fade-up glass">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:balajigopinath@outlook.com">balajigopinath@outlook.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/balajigopinath-PMP" target="_blank">linkedin.com/in/balajigopinath-PMP</a></p>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
