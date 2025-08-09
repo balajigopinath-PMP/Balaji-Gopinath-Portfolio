@@ -246,3 +246,36 @@ a:hover {
 .unmute-btn.show {
   opacity: 1;
 }
+.exp-title {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 0;
+  transition: color 0.3s ease;
+}
+
+.exp-title:hover {
+  color: #007aff;
+}
+
+.exp-content {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 1;
+  padding-left: 4px;
+}
+
+.exp-list li:not(.expanded) .exp-content {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+.unmute-btn {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.unmute-btn.show {
+  opacity: 1;
+}
