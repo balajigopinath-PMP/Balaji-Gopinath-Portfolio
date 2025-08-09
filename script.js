@@ -10,25 +10,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.2 });
   fadeElements.forEach(el => fadeObserver.observe(el));
 
-  /*** Experience bullets with .exp-title / .exp-content ***/
+  /*** Experience bullets ***/
   document.querySelectorAll(".exp-list li").forEach(li => {
     const headingText = li.querySelector("strong").textContent;
     const fullText = li.getAttribute("data-full");
 
-    // Clear and rebuild HTML
+    // Store in dataset
+    li.dataset.heading = headingText;
+    li.dataset.full = fullText;
+
+    // Render HTML
     li.innerHTML = `
       <div class="exp-title"><strong>${headingText}</strong></div>
       <div class="exp-content">${fullText}</div>
     `;
 
-    // Expand all by default
-    li.classList.add("expanded");
-
-    // Toggle on click
+    // Toggle click
     li.querySelector(".exp-title").addEventListener("click", () => {
       li.classList.toggle("expanded");
     });
   });
+
+  // Auto expand all after render for animation to work
+  setTimeout(() => {
+    document.querySelectorAll(".exp-list li").forEach(li => li.classList.add("expanded"));
+  }, 50);
 
   /*** Auto collapse on scroll away ***/
   const expObserver = new IntersectionObserver((entries) => {
