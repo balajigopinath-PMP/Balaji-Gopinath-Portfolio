@@ -100,3 +100,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   videoObserver.observe(document.querySelector(".intro"));
 });
+document.addEventListener("DOMContentLoaded", () => {
+  // Experience toggle
+  document.querySelectorAll(".exp-title").forEach(title => {
+    title.addEventListener("click", () => {
+      const parent = title.parentElement;
+      parent.classList.toggle("expanded");
+    });
+  });
+
+  // Auto-expand all initially
+  document.querySelectorAll(".exp-list li").forEach(li => {
+    li.classList.add("expanded");
+  });
+
+  // Unmute button fade after 2.5 seconds
+  const unmuteBtn = document.getElementById("unmuteBtn");
+  setTimeout(() => {
+    unmuteBtn.classList.remove("show");
+  }, 2500);
+
+  // Show button at start
+  unmuteBtn.classList.add("show");
+
+  // Click to unmute
+  unmuteBtn.addEventListener("click", () => {
+    const iframe = document.getElementById("introVideo");
+    iframe.src = iframe.src.replace("mute=1", "mute=0");
+    unmuteBtn.classList.remove("show");
+  });
+});
