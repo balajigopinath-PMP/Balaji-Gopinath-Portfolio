@@ -76,16 +76,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 60);
 
     // Auto-collapse when scrolled out of view, expand when in view
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const target = entry.target;
-        if (entry.isIntersecting) {
-          target.classList.add("expanded");
-        } else {
-          target.classList.remove("expanded");
+    const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      expandItem(entry.target);
+    } else {
+      // Delay collapse by 300ms for smoother feel
+      setTimeout(() => {
+        if (!entry.target.isIntersecting) {
+          collapseItem(entry.target);
         }
-      });
-    }, { threshold: 0.45 });
+      }, 300);
+    }
+  });
+}, { threshold: 0.5 });
 
     expItems.forEach(li => scrollObserver.observe(li));
   } catch (e) {
