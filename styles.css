@@ -1,7 +1,7 @@
 body {
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, rgba(0,122,255,0.15), rgba(175,82,222,0.15), rgba(255,149,0,0.15));
+  background: linear-gradient(120deg, #f6f6f7, #e9e9eb, #f6f6f7);
   background-size: 400% 400%;
   animation: gradientShift 12s ease infinite;
   color: #1d1d1f;
@@ -18,41 +18,32 @@ h1, h2, h3, h4 {
   color: #1d1d1f;
 }
 
-.intro {
-  text-align: center;
-  padding: 60px 20px;
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  padding: 40px;
+  margin: 40px 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 0.5px rgba(255,255,255,0.6),
+              0 8px 20px rgba(0,0,0,0.1);
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
+.exp-list li {
+  font-weight: bold; /* bullet headings bold */
 }
 
-.video-container img,
-.video-container iframe {
-  width: 100%;
-  border-radius: 16px;
-  display: block;
-}
-
-.video-container iframe {
+.tap-to-unmute {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-}
-
-.unmute-btn {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  padding: 6px 12px;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 8px 14px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #007aff;
   font-size: 14px;
   font-weight: 500;
@@ -61,105 +52,6 @@ h1, h2, h3, h4 {
   transition: opacity 0.4s ease;
 }
 
-.unmute-btn.show {
+.tap-to-unmute.visible {
   opacity: 1;
-}
-
-.btn-download {
-  background: #007aff;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 20px;
-  transition: background 0.3s ease;
-}
-
-.btn-download:hover {
-  background: #005bb5;
-}
-
-.card {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 40px;
-  border-radius: 20px;
-}
-
-.glass {
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255,255,255,0.3);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.tag-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tag-grid span {
-  background: rgba(255,255,255,0.4);
-  padding: 8px 16px;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tag-grid span:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.exp-list {
-  list-style: none;
-  padding: 0;
-}
-
-.exp-list li {
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  cursor: pointer;
-  position: relative;
-}
-
-.exp-list li::after {
-  content: '›';
-  position: absolute;
-  right: 0;
-  top: 12px;
-  font-size: 18px;
-  color: #007aff;
-  transition: transform 0.3s ease;
-}
-
-.exp-list li.expanded::after {
-  transform: rotate(90deg);
-}
-
-.exp-list li span {
-  display: block;
-  margin-top: 6px;
-  font-size: 14px;
-  color: #333;
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: all 0.4s ease;
-}
-
-.exp-list li.expanded span {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
