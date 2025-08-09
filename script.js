@@ -1,31 +1,26 @@
-// Video modal
-document.getElementById("playVideo").addEventListener("click", function() {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  frame.src = "https://www.youtube.com/embed/0WkZfPto9aI?autoplay=1";
-  modal.style.display = "block";
-});
+// Video autoplay + stop on scroll
+const introVideo = document.getElementById("introVideo");
+const videoPlaceholder = document.getElementById("videoPlaceholder");
 
-document.querySelector(".close").addEventListener("click", function() {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  frame.src = "";
-  modal.style.display = "none";
-});
-
-window.onclick = function(event) {
-  const modal = document.getElementById("videoModal");
-  if (event.target === modal) {
-    modal.style.display = "none";
-    document.getElementById("videoFrame").src = "";
+window.addEventListener("scroll", () => {
+  const introSection = document.querySelector(".intro");
+  const rect = introSection.getBoundingClientRect();
+  if (rect.bottom < 0 || rect.top > window.innerHeight) {
+    introVideo.src = "";
+    videoPlaceholder.style.display = "block";
+  } else {
+    if (!introVideo.src) {
+      introVideo.src = "https://www.youtube.com/embed/0WkZfPto9aI?autoplay=1&mute=1&controls=0";
+      videoPlaceholder.style.display = "none";
+    }
   }
-};
+});
 
-// Expand/collapse bullets on scroll
+// Experience auto-expand on scroll
 const expItems = document.querySelectorAll(".exp-list li");
 
-function toggleExpandOnView(entries) {
-  entries.forEach((entry, index) => {
+const bulletObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
       setTimeout(() => {
         entry.target.classList.add("expanded");
@@ -35,19 +30,14 @@ function toggleExpandOnView(entries) {
           span.textContent = fullText;
           entry.target.appendChild(span);
         }
-      }, index * 120); // Cascade effect
-    } else {
-      entry.target.classList.remove("expanded");
-      const span = entry.target.querySelector("span");
-      if (span) span.remove();
+      }, i * 120);
     }
   });
-}
+}, { threshold: 0.5 });
 
-const bulletObserver = new IntersectionObserver(toggleExpandOnView, { threshold: 0.5 });
 expItems.forEach(item => bulletObserver.observe(item));
 
-// Fade-up animation for sections
+// Fade-up sections
 const fadeElements = document.querySelectorAll(".fade-up");
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
