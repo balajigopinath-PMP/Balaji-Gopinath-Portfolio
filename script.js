@@ -1,151 +1,102 @@
-// Video modal
-document.getElementById("playVideo").addEventListener("click", function () {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  frame.src = "https://www.youtube.com/embed/0WkZfPto9aI?autoplay=1&mute=1";
-  modal.style.display = "block";
-
-  // Show Tap to Unmute after 2.5s
-  setTimeout(() => {
-    document.querySelector(".tap-to-unmute").classList.add("visible");
-  }, 2500);
-});
-
-document.querySelector(".close").addEventListener("click", closeVideo);
-
-window.onclick = function (event) {
-  const modal = document.getElementById("videoModal");
-  if (event.target === modal) closeVideo();
-};
-
-function closeVideo() {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  modal.style.display = "none";
-  frame.src = "";
-  document.querySelector(".tap-to-unmute").classList.remove("visible");
-}
-
-// Tap to Unmute functionality
-document.querySelector(".tap-to-unmute").addEventListener("click", function () {
-  const iframe = document.getElementById("videoFrame");
-  const src = iframe.src.replace("mute=1", "mute=0");
-  iframe.src = src;
-  this.classList.remove("visible");
-});
-
-// Expand/collapse bullets on scroll
-const expItems = document.querySelectorAll(".exp-list li");
-
-function toggleExpandOnView(entries) {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add("expanded");
-        const fullText = entry.target.getAttribute("data-full");
-        if (!entry.target.querySelector("span")) {
-          const span = document.createElement("span");
-          span.textContent = fullText;
-          entry.target.appendChild(span);
-        }
-      }, index * 120);
-    } else {
-      entry.target.classList.remove("expanded");
-      const span = entry.target.querySelector("span");
-      if (span) span.remove();
-    }
-  });
-}
-
-const bulletObserver = new IntersectionObserver(toggleExpandOnView, { threshold: 0.5 });
-expItems.forEach(item => bulletObserver.observe(item));
-
-// Fade-up animation for sections
-const fadeElements = document.querySelectorAll(".fade-up");
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
-  });
-}, { threshold: 0.3 });
-fadeElements.forEach(el => fadeObserver.observe(el));
 document.addEventListener("DOMContentLoaded", () => {
-  const expItems = document.querySelectorAll(".exp-list li");
-  const observer = new IntersectionObserver(handleIntersect, { threshold: 0.2 });
-
-  // Expand all on load
-  expItems.forEach(li => {
-    li.innerHTML = `<strong>${li.querySelector("strong").innerText}:</strong> ${li.dataset.full}`;
-    observer.observe(li);
-  });
-
-  // Click to toggle
-  expItems.forEach(li => {
-    li.addEventListener("click", () => toggleItem(li));
-  });
-
-  function toggleItem(li) {
-    if (li.classList.contains("collapsed")) {
-      li.innerHTML = `<strong>${li.querySelector("strong").innerText}:</strong> ${li.dataset.full}`;
-      li.classList.remove("collapsed");
-    } else {
-      const heading = li.querySelector("strong").innerText.split(":")[0];
-      li.innerHTML = `<strong>${heading}</strong>`;
-      li.classList.add("collapsed");
-    }
-  }
-
-  function handleIntersect(entries) {
-    entries.forEach(entry => {
-      const li = entry.target;
-      if (entry.isIntersecting) {
-        li.innerHTML = `<strong>${li.querySelector("strong").innerText}:</strong> ${li.dataset.full}`;
-        li.classList.remove("collapsed");
-      } else {
-        const heading = li.querySelector("strong").innerText.split(":")[0];
-        li.innerHTML = `<strong>${heading}</strong>`;
-        li.classList.add("collapsed");
-      }
-    });
-  }
-
-  // Fade-up animations
-  const faders = document.querySelectorAll(".fade-up");
+  /*** Fade-in animation on scroll ***/
+  const fadeElements = document.querySelectorAll(".fade-up");
   const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
       }
     });
   }, { threshold: 0.2 });
+  fadeElements.forEach(el => fadeObserver.observe(el));
 
-  faders.forEach(fade => fadeObserver.observe(fade));
+  /*** Experience bullet expand/collapse ***/
+  const expItems = document.querySelectorAll(".exp-list li");
 
-  // Video autoplay + unmute button
-  const video = document.getElementById("introVideo");
-  const unmuteBtn = document.getElementById("unmuteBtn");
+  expItems.forEach(item => {
+    const headingText = item.querySelector("strong").textContent;
+    const fullText = item.getAttribute("data-full");
 
-  let unmuteTimeout = setTimeout(() => unmuteBtn.classList.add("show"), 2500);
+    // Store short & full text
+    item.setAttribute("data-heading", headingText);
 
-  unmuteBtn.addEventListener("click", () => {
-    let src = video.src.replace("mute=1", "mute=0");
-    video.src = src;
-    unmuteBtn.classList.remove("show");
+    // Expanded on load
+    item.classList.add("expanded");
+    item.innerHTML = `<div class="exp-content"><strong>${headingText}</strong>: ${fullText}</div>`;
+
+    // Click toggle
+    item.addEventListener("click", () => {
+      const isExpanded = item.classList.contains("expanded");
+      if (isExpanded) {
+        collapseItem(item);
+      } else {
+        expandItem(item);
+      }
+    });
   });
 
-  const videoObserver = new IntersectionObserver((entries) => {
+  // Expand with smooth animation
+  function expandItem(item) {
+    const heading = item.getAttribute("data-heading");
+    const full = item.getAttribute("data-full");
+    item.innerHTML = `<div class="exp-content"><strong>${heading}</strong>: ${full}</div>`;
+    item.classList.add("expanded");
+    item.querySelector(".exp-content").style.maxHeight = "1000px";
+  }
+
+  // Collapse with smooth animation
+  function collapseItem(item) {
+    const heading = item.getAttribute("data-heading");
+    item.innerHTML = `<div class="exp-content"><strong>${heading}</strong></div>`;
+    item.classList.remove("expanded");
+    item.querySelector(".exp-content").style.maxHeight = "40px";
+  }
+
+  /*** Auto expand/collapse on scroll ***/
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        let src = video.src;
-        if (!src.includes("autoplay=1")) {
-          video.src = src + "&autoplay=1&mute=1";
-          clearTimeout(unmuteTimeout);
-          unmuteTimeout = setTimeout(() => unmuteBtn.classList.add("show"), 2500);
-        }
+        expandItem(entry.target);
       } else {
-        video.src = video.src.replace("&autoplay=1", "");
+        collapseItem(entry.target);
       }
     });
   }, { threshold: 0.5 });
 
-  videoObserver.observe(video);
+  expItems.forEach(item => observer.observe(item));
+
+  /*** Video autoplay + Tap to Unmute logic ***/
+  const introVideo = document.getElementById("introVideo");
+  const unmuteBtn = document.getElementById("unmuteBtn");
+  const videoPlaceholder = document.getElementById("videoPlaceholder");
+
+  // Hide placeholder & play video on load
+  videoPlaceholder.style.display = "none";
+  introVideo.style.display = "block";
+
+  // Show unmute button after 2.5s
+  setTimeout(() => {
+    unmuteBtn.style.display = "block";
+  }, 2500);
+
+  unmuteBtn.addEventListener("click", () => {
+    const iframeSrc = introVideo.src.replace("mute=1", "mute=0");
+    introVideo.src = iframeSrc;
+    unmuteBtn.style.display = "none";
+  });
+
+  // Reload muted video when scrolling back to intro
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let baseSrc = introVideo.src.split("?")[0];
+        introVideo.src = `${baseSrc}?autoplay=1&mute=1&controls=0&modestbranding=1`;
+        setTimeout(() => {
+          unmuteBtn.style.display = "block";
+        }, 2500);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  videoObserver.observe(document.querySelector(".intro"));
 });
