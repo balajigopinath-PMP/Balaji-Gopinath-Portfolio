@@ -181,3 +181,35 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
 }
+.exp-list li {
+  overflow: hidden;
+  transition: all 0.4s ease;
+  margin-bottom: 10px;
+}
+
+.exp-title {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 5px 0;
+}
+
+.exp-content {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.expanded .exp-content {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* Unmute button fade */
+.unmute-btn {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.unmute-btn.show {
+  opacity: 1;
+}
