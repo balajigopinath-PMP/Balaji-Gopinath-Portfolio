@@ -279,3 +279,75 @@ a:hover {
 .unmute-btn.show {
   opacity: 1;
 }
+/* --- Experience expand/collapse (fluid) --- */
+.exp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exp-list li {
+  margin: 12px 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* title row: heading + chevron */
+.exp-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.exp-title strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* chevron */
+.chev {
+  color: #007aff;
+  font-size: 18px;
+  transform-origin: center;
+  transition: transform 360ms cubic-bezier(.2,.8,.2,1);
+  opacity: 0.95;
+}
+
+/* animated content */
+.exp-content {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: max-height 520ms cubic-bezier(.2,.8,.2,1), opacity 380ms ease, transform 380ms ease;
+  color: rgba(255,255,255,0.92);
+  padding-top: 6px;
+  line-height: 1.45;
+}
+
+/* expanded state */
+.exp-list li.expanded .exp-content {
+  max-height: 600px; /* large enough for content; adjust if your bullets are longer */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exp-list li.expanded .chev {
+  transform: rotate(90deg);
+}
+
+/* unmute button show/hide */
+.unmute-btn {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: auto;
+}
+.unmute-btn.show {
+  opacity: 1;
+}
+
+/* Accessibility: make titles keyboard-focusable */
+.exp-title { outline: none; }
+.exp-title:focus { box-shadow: 0 0 0 3px rgba(0,122,255,0.12); border-radius: 6px; }
